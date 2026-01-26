@@ -1,0 +1,62 @@
+
+# 使用说明：docker_command_valid_cap_v2.sh 关于caption的一键评测脚本
+
+========================================
+一、脚本介绍
+========================================
+docker_command_valid_cap_v2.sh 是基于 Docker 的一键caption评测脚本。
+它将所有需要挂载的宿主机路径集中放在脚本开头的变量里，
+用户只需修改这些变量即可完成不同环境下的配置。
+
+========================================
+二、宿主机上需要准备的目录
+========================================
+1. 代码文件夹：
+   rs_contest/src   （对应变量 HOST_SRC）
+
+2. 评测数据文件夹：
+   path_to_valid_data/    （对应变量 HOST_VALID）
+
+3. 工具及权重文件夹：
+   rs_contest/tool        （对应变量 HOST_TOOL）
+
+4. 输出目录：
+   path_to_output/        （对应变量 HOST_OUT）
+
+说明：
+- FM9G 模型目录 (HOST_FM9G) 和 transform.py (HOST_TRANSFORM)
+  会自动基于 HOST_TOOL 生成，一般无需单独修改。
+
+========================================
+三、准备评测数据
+========================================
+1. 在脚本开头修改 JSON_FILE 变量，指定新的 JSON 文件路径。
+
+========================================
+四、配置脚本变量
+========================================
+打开 docker_command_valid_cap_v2.sh，根据实际情况修改以下变量：
+
+HOST_SRC=/data/.../rs_contest/src
+HOST_VALID=/data/.../valid_contest
+HOST_TOOL=/data/.../rs_contest/tool
+HOST_OUT=/data/.../output
+IMAGE_TAG=rs-eval:1.0
+JSON_FILE=$HOST_VALID/zh/xxx.json
+OUTPUT_SUBDIR=your_output_subdir
+
+========================================
+五、运行方式
+========================================
+在脚本所在目录执行：
+
+bash docker_command_valid_cap_v2.sh
+
+========================================
+六、结果输出
+========================================
+评测结果会生成在宿主机的：
+
+$HOST_OUT/$OUTPUT_SUBDIR
+
+
